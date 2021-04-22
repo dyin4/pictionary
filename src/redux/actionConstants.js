@@ -1,0 +1,12 @@
+export const NEW_MESSAGE = "NEW_MESSAGE";
+export const CONNECTED = "CONNECTED";
+export const SHOW_SKETCH = "SHOWSKETCH";
+export const CLEAR = "CLEAR";
+export const USER = "USER";
+export const CLIENTS = "CLIENTS";
+export const CURRENT_PLAYER = "CURRENT_USER";
+export const NEW_TIME = "NEW_TIME";
+export const GAME_START = "GAME_START";
+export const SET_WORD = "SET_WORD";
+export const END_GAME = "END_GAME";
+export const GAME_STATUS = "GAME_STATUS";

@@ -1,0 +1,48 @@
+/** 1. SPINNER **/
+.spinner {
+  font-size: 3em;
+  color: #00c2c7;
+  animation: spin 2s infinite linear;
+  margin: auto 50%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.message-box {
+  height: 400px;
+  width: 300px;
+  border: solid;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.bar-container {
+  width: 80%;
+  height: 40px;
+  margin: 40px 10%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px #ccc;
+}
+
+.bar-background {
+  height: 100%;
+  background-color: #00c2c7;
+  box-shadow: inset 0 0 16px rgb(0, 100, 104);
+}
+
+.bar-container-text {
+  margin-top: 0px;
+  text-align: center;
+  font-size: larger;
+}
