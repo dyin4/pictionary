@@ -7,9 +7,7 @@ const server = require("http").Server(app);
 const deploy = "reactpictionary.herokuapp.com";
 // The origin is used by CORS
 const origin =
-  process.env.NODE_ENV === "production"
-    ? "herokuapp.com"
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? deploy : "http://localhost:3000";
 const io = require("socket.io")(server, {
   cors: {
     origin: origin,

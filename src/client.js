@@ -11,11 +11,11 @@ import {
 
 /** CLIENT CONFIGURATION - connect to the server */
 const socketIOClient = require("socket.io-client");
+const deploy = "reactpictionary.herokuapp.com";
 
 // When deployed, connect to the hosted server, otherwise connect to local server
 // Localhost port must match server
-let host =
-  process.env.NODE_ENV === "production" ? "herokuapp.com" : "localhost:4002";
+let host = process.env.NODE_ENV === "production" ? deploy : "localhost:4002";
 let socket = socketIOClient.connect(host, { secure: true });
 // Checks which host we're connected to (for troubleshooting);
 console.log("connected to " + host);
