@@ -25,8 +25,7 @@ const Sketch = (p5) => {
 
   p5.setup = () => {
     socket = io.connect("reactpictionary.herokuapp.com" || "localhost:4002");
-
-    p5.createCanvas(400, 400);
+    p5.createCanvas(500,500);
     p5.background(250);
     socket.on("DRAWING", (data) => {
       p5.strokeWeight(10);

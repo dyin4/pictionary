@@ -4,10 +4,11 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 
+const deploy = "reactpictionary.herokuapp.com";
 // The origin is used by CORS
 const origin =
   process.env.NODE_ENV === "production"
-    ? "reactpictionary.herokuapp.com"
+    ? "herokuapp.com"
     : "http://localhost:3000";
 const io = require("socket.io")(server, {
   cors: {
@@ -45,6 +46,7 @@ const clients = {};
 
 let players = [];
 let starts = 0;
+let status = "end";
 
 const processMessage = (msg) => {
   messages.push(msg);
@@ -53,6 +55,9 @@ const processMessage = (msg) => {
 
 io.on("connection", (client) => {
   client.emit("notification", "Server says hello " + client.id);
+  if (status === "start") {
+    io.sockets.emit("game", "start");
+  }
 
   client.on("join", (username) => {
     client.emit("chat joined");
@@ -112,6 +117,7 @@ io.on("connection", (client) => {
       clearInterval(interval);
       clearInterval(interval2);
     }
+    status = p;
     io.sockets.emit("game", p);
   });
 
@@ -133,6 +139,7 @@ io.on("connection", (client) => {
     //io.sockets.emit("game", "wait");
     if (starts === players.length || time > 0) {
       io.sockets.emit("game", "start");
+      status = "start";
       console.log("current player", players[time]);
       console.log("current player time", time);
 
@@ -144,6 +151,7 @@ io.on("connection", (client) => {
           starts = 0;
           clearInterval(interval);
           clearInterval(interval2);
+          status = "end";
           io.sockets.emit("game", "end");
         }
         time++;

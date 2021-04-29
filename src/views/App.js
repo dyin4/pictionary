@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import JoinChat from "../components/join-chat";
+import OnboardingSlides from "../components/OnboardingSlides";
 import Canvas from "../components/canvas/canvas";
 import Messages from "../components/messages";
 import Form from "../components/form";
@@ -21,17 +21,10 @@ const App = () => {
   const current_player = useSelector((state) => state.current_player);
   const clients = useSelector((state) => state.clients);
   const dispatch = useDispatch();
-
-  /* The following is not needed after the extension activities. JoinChat now
-   *  handles connecting to the chat.
-   *  const dispatch = useDispatch();
-   *  useEffect(() => dispatch(connectToChat()), [dispatch]);
-   *
-   */
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (start == "start") {
-      //dispatch(updateStart("wait"));
       setClick(false);
     }
   }, [start, dispatch]);
@@ -39,51 +32,74 @@ const App = () => {
   console.log("start", start);
   console.log("current user", current_player);
   return (
-    <div className="container">
+    <div className="p-app">
       {isConnected ? (
         <>
+          <header className="p-header">
+            <div className="siteheader">CS7580 Final Porject - Pictionary</div>
+          </header>
+
           {clients.length < PLAYER_NUM && (
-            <div>
+            <div className="p-waiting">
               <Spinner />
-              <h3>wait for other players to joining</h3>
+              <div className="notice">
+                Hi {user}, please wait for other players to join
+              </div>
             </div>
           )}
           {clickStart && (
-            <div>
+            <div className="p-waiting">
               <Spinner />
-              <h3>wait for other players to click start</h3>
+              <div className="notice">
+                Hi {user}, please wait for other players to click start
+              </div>
             </div>
           )}
-          <GameStatus />
-          <Timer />
-          <Word />
-          {clients.length >= PLAYER_NUM && start !== "start" && (
-            <button
-              //disabled={clickStart}
-              onClick={() => {
-                setClick(true);
-                dispatch(startGame(0));
-                // dispatch(startTheTimer(5));
-                //dispatch(setStart(true));
-              }}
-            >
-              start
-            </button>
-          )}
-          <div className="row">
-            <div className="col-sm-7">
+
+          <div className="p-board">
+            <div className="p-sidebar">
+              <div className="p-start">
+                {clients.length >= PLAYER_NUM && start !== "start" && (
+                  <button
+                    className="btn btn-primary float-right button-green"
+                    onClick={() => {
+                      setClick(true);
+                      dispatch(startGame(0));
+                    }}
+                  >
+                    START DRAWING!
+                  </button>
+                )}
+              </div>
+
+              <div className="p-status">
+                <GameStatus />
+                <Timer />
+              </div>
+
+              <div className="p-status">
+                <Word />
+              </div>
+            </div>
+
+            <div className="p-canvas">
               <Canvas />
             </div>
-            {/*Chat window design*/}
-            <div className="col-sm-5">
-              <Messages />
-              <Form />
+
+            <div className="p-chatbar">
+              <div className="chat">
+                <div className="notice">Chat Room</div>
+                <Messages className="chat__buffer" />
+                <Form className="chatbox" />
+              </div>
+              <div className="userlist">
+                <PlayerList />
+              </div>
             </div>
           </div>
-          <PlayerList />
         </>
       ) : (
-        <JoinChat />
+        <OnboardingSlides />
       )}
     </div>
   );

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { connectToChat, gameStatus, storeUser } from "../redux/actions";
 import ProgressBar from "./ProgressBar";
 let progressTimer = null;
 
-const JoinChat = () => {
+const JoinChat = (props) => {
   const [username, setUsername] = useState("");
   const [isValid, setIsValid] = useState(null);
   const gameInProgress = useSelector((state) => state.start);
@@ -16,10 +15,9 @@ const JoinChat = () => {
       else {
         clearInterval(progressTimer);
         return 100;
-      }
+      } 
     });
   };
-
   const startProcess = () => {
     setProgress(0);
     progressTimer = setInterval(showProgress, 1000);
@@ -42,8 +40,8 @@ const JoinChat = () => {
   const verifyUsername = () => {
     if (username.length > 0) {
       setIsValid(true);
-      dispatch(connectToChat(username));
-      dispatch(storeUser(username));
+      props.name(username)
+      props.callback('over')
     } else {
       setIsValid(false);
     }
@@ -63,13 +61,15 @@ const JoinChat = () => {
 
   return (
     <form className="my-4" onSubmit={(e) => e.preventDefault()}>
-      <div className="row">
+      <div className="row"  id="joinchat-info">
+        <h1>Welcome to Pictionary</h1>
+        <h2>Please join to play :D</h2>
         <div className="col">
           <input
             aria-label="Your username"
             type="text"
             className="form-control has-validation"
-            id="username"
+            id="username-info"
             invalid={`${isValid === false}`}
             valid={`${isValid === true}`}
             placeholder="Username"
@@ -90,6 +90,7 @@ const JoinChat = () => {
           <button
             type="button"
             className="btn btn-primary float-right"
+            id="join-button"
             onClick={verifyUsername}
             disabled={gameInProgress === "start"}
           >

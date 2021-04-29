@@ -10,7 +10,6 @@ import {
   NEW_TIME,
   GAME_START,
   SET_WORD,
-  GAME_STATUS,
 } from "./actionConstants";
 
 const INITIAL_STATE = {
@@ -20,16 +19,13 @@ const INITIAL_STATE = {
   user: "",
   clients: [],
   current_player: "",
-  time: 5,
-  start: "end",
+  time: 30,
+  start: "new",
   word: "",
 };
 
 const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    // case GAME_STATUS:
-    //   console.log("game status changed")
-    //   return { ...state, status: action.payload.status };
     case NEW_MESSAGE:
       return { ...state, messages: action.payload.messages };
     case CONNECTED:

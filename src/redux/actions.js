@@ -8,7 +8,6 @@ import {
   NEW_TIME,
   GAME_START,
   SET_WORD,
-  GAME_STATUS,
 } from "./actionConstants";
 import {
   clear,
@@ -16,7 +15,6 @@ import {
   sendMessage,
   startTheGame,
   startTheTimer,
-  start,
   end,
   sendRightAnswerMsg,
 } from "../client";
@@ -44,23 +42,12 @@ export const clearDraw = (p) => {
   return (dispatch) => clear(p);
 };
 
-// export const getCurrentPlayer = () => {
-//   return (dispatch) => getPlayer();
-// };
-
 export const clearSketch = (p) => ({
   type: CLEAR,
   payload: {
     p,
   },
 });
-
-// export const gameStatus = (status) => ({
-//   type: GAME_STATUS,
-//   payload: {
-//     status,
-//   },
-// });
 
 export const endGame = () => {
   return (dispatch) => end();
@@ -128,10 +115,6 @@ export const startTimer = (time) => {
     });
   };
 };
-
-// export const setStart = (status) => {
-//   return (dispatch) => start(status);
-// };
 
 export const updateStart = (start) => ({
   type: GAME_START,

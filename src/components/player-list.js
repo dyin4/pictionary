@@ -5,7 +5,7 @@ const PlayerList = () => {
 
   return (
     <>
-      <h1>Playerlist</h1>
+      <div className="notice">Player list</div>
       <table className="table table-striped table-bordered my-4">
         <tbody>
           {clients.map((message, index) => (

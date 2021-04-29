@@ -20,16 +20,13 @@ const GameStatus = () => {
 
   return (
     <>
-      <h1>Hi {user}</h1>
-      {/*Current who is drawing, TODO: styling*/}
-      <h1>
-        Current Player:{" "}
+      <div className="notice-user"> Hello, {user} </div>
+      <div className="notice-player">
         {current_player !== null && start === "start"
-          ? `${current_player} is drawing`
+          ? `Player ${current_player} is drawing`
           : ""}
-      </h1>
-      {/*Game over display*/}
-      {start === "end" && <h1>Game Over</h1>}
+      </div>
+      {start === "end" && <div className="game-over">GAME OVER</div>}
     </>
   );
 };

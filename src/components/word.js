@@ -26,7 +26,7 @@ const Word = () => {
   return (
     <>
       {current_player === user && start !== "end" && (
-        <h1>Current word: {word}</h1>
+        <div className="word">Current Word: {word}</div>
       )}
     </>
   );

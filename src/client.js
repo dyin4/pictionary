@@ -15,9 +15,7 @@ const socketIOClient = require("socket.io-client");
 // When deployed, connect to the hosted server, otherwise connect to local server
 // Localhost port must match server
 let host =
-  process.env.NODE_ENV === "production"
-    ? "reactpictionary.herokuapp.com"
-    : "localhost:4002";
+  process.env.NODE_ENV === "production" ? "herokuapp.com" : "localhost:4002";
 let socket = socketIOClient.connect(host, { secure: true });
 // Checks which host we're connected to (for troubleshooting);
 console.log("connected to " + host);
@@ -35,11 +33,6 @@ socket.on("chat joined", () => {
   store.dispatch(isConnected());
 });
 
-// socket.on("game is in progress", (data) => {
-//   console.log("game is in progress", data);
-//   store.dispatch(gameStatus(data));
-// });
-
 socket.on("clients", (clients) => {
   store.dispatch(getAllClients(clients));
 });
@@ -52,9 +45,6 @@ socket.on("clear", (p) => {
   store.dispatch(clearSketch(p));
 });
 
-// This process will allow different clients to have duplicate usernames! A real
-// application should first check with the server to make sure the client's
-// username is unique.
 export const joinChat = (username) => {
   socket.emit("join", username);
 };
@@ -66,9 +56,6 @@ export const sendMessage = (msg) => {
 export const sendRightAnswerMsg = (msg) => {
   socket.emit("right answer", msg);
 };
-// export const start = (status) => {
-//   socket.emit("game", status);
-// };
 
 export const clear = (p) => {
   socket.emit("clear", p);
@@ -86,9 +73,6 @@ export const startTheGame = (index, callbackFunc) => {
     console.log("current player", time);
     callbackFunc(time);
   });
-  // socket.on("time", (time) => {
-  //   callbackFunc2(time);
-  // });
 };
 
 export const startTheTimer = (time, callbackFunc) => {

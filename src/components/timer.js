@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startTimer } from "../redux/actions";
 
@@ -15,8 +15,7 @@ const Timer = () => {
 
   return (
     <>
-      <h1>Timer</h1>
-      {start !== "end" && <p>{time}</p>}
+      {start !== "end" && <div className="timer">Timer {time}</div>}
     </>
   );
 };

@@ -11,7 +11,9 @@ const ProgressBar = (props) => (
         }}
       ></div>
     </div>
-    <p className="bar-container-text">Game is in progress now, please wait</p>
+    <p className="bar-container-text">
+      A game is in progress now, please wait to join next game
+    </p>
   </>
 );
 

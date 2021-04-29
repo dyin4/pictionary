@@ -20,7 +20,6 @@ const Form = () => {
     dispatch(sendRightAnswer(messageTxt));
 
     let index = clients.indexOf(current_player) + 1;
-    //dispatch(startGame(index));
     if (index === clients.length) {
       dispatch(endGame());
     } else {
@@ -58,7 +57,7 @@ const Form = () => {
         <div className="col-auto">
           <button
             type="button"
-            className="btn btn-primary float-right"
+            className="btn btn-primary float-right button-green"
             onClick={() => {
               dispatch(sendToChat(messageTxt));
               console.log("word", word);
