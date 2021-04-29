@@ -90,9 +90,11 @@ io.on("connection", (client) => {
       players = arr;
 
       io.sockets.emit("clients", players);
-      if (players.length === 1) {
+      if (players.length === 1 || players.length === 0) {
         io.sockets.emit("game", "end");
         starts = 0;
+        messages = [];
+        io.sockets.emit("all messages", messages);
         clearInterval(interval);
         clearInterval(interval2);
       }
